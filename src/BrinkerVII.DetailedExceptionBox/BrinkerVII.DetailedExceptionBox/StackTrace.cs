@@ -21,6 +21,7 @@ namespace BrinkerVII
 		}
 		private void ParseString()
 		{
+			if (this.String == null) { return; }
 			this.lines.Clear();
 			foreach (string line in this.String.Split('\n'))
 			{

@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.btnDivideByZero = new System.Windows.Forms.Button();
+			this.btnStupidException = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnDivideByZero
@@ -41,11 +42,22 @@
 			this.btnDivideByZero.UseVisualStyleBackColor = true;
 			this.btnDivideByZero.Click += new System.EventHandler(this.btnDivideByZero_Click);
 			// 
+			// btnStupidException
+			// 
+			this.btnStupidException.Location = new System.Drawing.Point(12, 41);
+			this.btnStupidException.Name = "btnStupidException";
+			this.btnStupidException.Size = new System.Drawing.Size(123, 23);
+			this.btnStupidException.TabIndex = 1;
+			this.btnStupidException.Text = "Russian words?";
+			this.btnStupidException.UseVisualStyleBackColor = true;
+			this.btnStupidException.Click += new System.EventHandler(this.btnStupidException_Click);
+			// 
 			// ATestForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(284, 266);
+			this.Controls.Add(this.btnStupidException);
 			this.Controls.Add(this.btnDivideByZero);
 			this.Name = "ATestForm";
 			this.Text = "Form1";
@@ -56,6 +68,7 @@
 		#endregion
 
 		private System.Windows.Forms.Button btnDivideByZero;
+		private System.Windows.Forms.Button btnStupidException;
 	}
 }
 

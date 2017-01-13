@@ -33,5 +33,19 @@ namespace FunctionalTest
 			int q = 5 / totallyNotZero;
 			MessageBox.Show(q.ToString());
 		}
+
+		private void btnStupidException_Click(object sender, EventArgs e)
+		{
+			try { this.Potato(); }
+			catch (Exception ex)
+			{
+				(new DetailedExceptionBox(ex)).Show();
+			}
+		}
+
+		private void Potato()
+		{
+			throw RussianDollException.Create("The spies are invading!");
+		}
 	}
 }

@@ -135,7 +135,7 @@ namespace BrinkerVII
 		}
 		public new string Text
 		{
-			get { return base.Text; }
+			get { return this.image.ToString(); }
 			set { base.Text = ""; }
 		}
 		protected override void OnPaint(PaintEventArgs pevent)

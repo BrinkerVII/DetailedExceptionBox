@@ -26,6 +26,7 @@ namespace BrinkerVII
 		}
 		private void DoPatternMatching()
 		{
+			if (this.String == null) { return; }
 			Match match = Regex.Match(this.String, bigOldPattern);
 			if (!match.Success)
 			{
