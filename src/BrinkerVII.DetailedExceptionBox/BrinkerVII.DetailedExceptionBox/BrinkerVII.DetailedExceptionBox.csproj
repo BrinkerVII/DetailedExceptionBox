@@ -48,11 +48,20 @@
     <Compile Include="DetailedExceptionBox.Designer.cs">
       <DependentUpon>DetailedExceptionBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExceptionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ExceptionPanel.Designer.cs">
+      <DependentUpon>ExceptionPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DetailedExceptionBox.resx">
       <DependentUpon>DetailedExceptionBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionPanel.resx">
+      <DependentUpon>ExceptionPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

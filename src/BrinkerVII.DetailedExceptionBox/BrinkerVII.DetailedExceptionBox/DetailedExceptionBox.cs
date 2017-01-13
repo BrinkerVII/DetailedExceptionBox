@@ -10,19 +10,29 @@ using System.Windows.Forms;
 
 namespace BrinkerVII
 {
+	public delegate void DisplayedExceptionChangedEventHandler(DetailedExceptionBox sender, Exception oldException);
 	public partial class DetailedExceptionBox : Form
 	{
-		private Exception exception = null;
+		public event DisplayedExceptionChangedEventHandler DisplayedExceptionChanged;
+		private Exception exception;
 		public Exception Exception
 		{
 			get { return this.exception; }
 			set
 			{
 				this.exception = value;
-				this.FillForm();
+				if (this.displayedException == null)
+				{
+					this.ChangeDisplayedException(this.exception);
+				}
 			}
 		}
-
+		private Exception displayedException;
+		public Exception DisplayedException
+		{
+			get { return this.displayedException; }
+		}
+		private ExceptionPanel currentExceptionPanel = null;
 		public DetailedExceptionBox()
 		{
 			InitializeComponent();
@@ -31,24 +41,28 @@ namespace BrinkerVII
 		{
 			this.Exception = e;
 		}
-		private void ClearForm()
+		private void ChangeDisplayedException(Exception newException)
 		{
-			foreach (Control control in this.Controls)
+			bool isNull = this.displayedException == null;
+			Exception oldException = this.displayedException;
+			if (this.displayedException != newException)
 			{
-				if (control is TextBox)
-				{
-					(control as TextBox).Text = "";
-				}
+				this.displayedException = newException;
+				this.OnDisplayedExceptionChanged(oldException);
 			}
 		}
-		private void FillForm()
+		protected virtual void OnDisplayedExceptionChanged(Exception oldException)
 		{
-			this.ClearForm();
-			if (this.exception == null) { return; }
+			if (this.currentExceptionPanel != null)
+			{
+				this.Controls.Remove(this.currentExceptionPanel);
+				this.currentExceptionPanel.Dispose();
+			}
 
-			this.txtMessage.Text = this.exception.Message;
-			this.txtHResult.Text = this.exception.HResult.ToString();
-			this.txtStackTrace.Text = this.exception.StackTrace;
+			this.currentExceptionPanel = new ExceptionPanel(this.displayedException);
+			this.Controls.Add(this.currentExceptionPanel);
+
+			this.DisplayedExceptionChanged?.Invoke(this, oldException);
 		}
 	}
 }
