@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace BrinkerVII
 {
@@ -52,7 +53,12 @@ namespace BrinkerVII
 
 			this.txtMessage.Text = this.exception.Message;
 			this.txtHResult.Text = this.exception.HResult.ToString();
-			this.txtStackTrace.Text = this.exception.StackTrace;
+
+			StackTrace trace = new StackTrace(this.exception.StackTrace);
+			foreach (StackTraceLine line in trace.Lines)
+			{
+				this.listStackTrace.Items.Add(line);
+			}
 		}
 	}
 }
