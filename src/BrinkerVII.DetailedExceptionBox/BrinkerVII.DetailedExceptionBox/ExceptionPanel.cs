@@ -27,8 +27,6 @@ namespace BrinkerVII
 		public ExceptionPanel()
 		{
 			InitializeComponent();
-
-			this.Dock = DockStyle.Fill;
 		}
 
 		public ExceptionPanel(Exception displayedException) : this()
@@ -53,6 +51,7 @@ namespace BrinkerVII
 
 			this.txtMessage.Text = this.exception.Message;
 			this.txtHResult.Text = this.exception.HResult.ToString();
+			this.txtSource.Text = this.exception.Source;
 
 			StackTrace trace = new StackTrace(this.exception.StackTrace);
 			foreach (StackTraceLine line in trace.Lines)

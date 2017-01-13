@@ -34,6 +34,8 @@
 			this.txtHResult = new System.Windows.Forms.TextBox();
 			this.txtMessage = new System.Windows.Forms.TextBox();
 			this.listStackTrace = new System.Windows.Forms.ListBox();
+			this.txtSource = new System.Windows.Forms.TextBox();
+			this.lblSource = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// lblStackTrace
@@ -68,6 +70,7 @@
 			// 
 			this.txtHResult.Location = new System.Drawing.Point(82, 104);
 			this.txtHResult.Name = "txtHResult";
+			this.txtHResult.ReadOnly = true;
 			this.txtHResult.Size = new System.Drawing.Size(488, 20);
 			this.txtHResult.TabIndex = 8;
 			// 
@@ -76,6 +79,7 @@
 			this.txtMessage.Location = new System.Drawing.Point(82, 3);
 			this.txtMessage.Multiline = true;
 			this.txtMessage.Name = "txtMessage";
+			this.txtMessage.ReadOnly = true;
 			this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.txtMessage.Size = new System.Drawing.Size(488, 95);
 			this.txtMessage.TabIndex = 6;
@@ -88,10 +92,29 @@
 			this.listStackTrace.Size = new System.Drawing.Size(488, 108);
 			this.listStackTrace.TabIndex = 12;
 			// 
+			// txtSource
+			// 
+			this.txtSource.Location = new System.Drawing.Point(82, 244);
+			this.txtSource.Name = "txtSource";
+			this.txtSource.ReadOnly = true;
+			this.txtSource.Size = new System.Drawing.Size(488, 20);
+			this.txtSource.TabIndex = 13;
+			// 
+			// lblSource
+			// 
+			this.lblSource.AutoSize = true;
+			this.lblSource.Location = new System.Drawing.Point(31, 247);
+			this.lblSource.Name = "lblSource";
+			this.lblSource.Size = new System.Drawing.Size(41, 13);
+			this.lblSource.TabIndex = 14;
+			this.lblSource.Text = "Source";
+			// 
 			// ExceptionPanel
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.lblSource);
+			this.Controls.Add(this.txtSource);
 			this.Controls.Add(this.listStackTrace);
 			this.Controls.Add(this.lblStackTrace);
 			this.Controls.Add(this.lblHResult);
@@ -99,7 +122,7 @@
 			this.Controls.Add(this.txtHResult);
 			this.Controls.Add(this.txtMessage);
 			this.Name = "ExceptionPanel";
-			this.Size = new System.Drawing.Size(635, 266);
+			this.Size = new System.Drawing.Size(581, 278);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -113,5 +136,7 @@
 		private System.Windows.Forms.TextBox txtHResult;
 		private System.Windows.Forms.TextBox txtMessage;
 		private System.Windows.Forms.ListBox listStackTrace;
+		private System.Windows.Forms.TextBox txtSource;
+		private System.Windows.Forms.Label lblSource;
 	}
 }

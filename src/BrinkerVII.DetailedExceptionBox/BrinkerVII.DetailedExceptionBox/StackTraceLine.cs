@@ -11,13 +11,13 @@ namespace BrinkerVII
 	class StackTraceLine
 	{
 		private string bigOldPattern = @"^\s+at\s*([\S\s]+)\sin\s([\S\s]+)\:line\s(\d+)";
+		private string toStringValue = "";
 		public string String { get; private set; }
 		public string Method { get; private set; }
 		public string File { get; private set; }
 		public string FileName { get; private set; }
 		public bool FileExists { get; private set; }
 		public int LineNumber { get; private set; }
-		private string toStringValue = "";
 		public StackTraceLine(string s)
 		{
 			this.String = s;

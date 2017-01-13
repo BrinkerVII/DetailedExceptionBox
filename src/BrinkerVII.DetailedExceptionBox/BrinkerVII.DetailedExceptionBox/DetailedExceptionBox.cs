@@ -13,6 +13,7 @@ namespace BrinkerVII
 	public delegate void DisplayedExceptionChangedEventHandler(DetailedExceptionBox sender, Exception oldException);
 	public partial class DetailedExceptionBox : Form
 	{
+		private Stack<Exception> exceptionStack = new Stack<Exception>();
 		public event DisplayedExceptionChangedEventHandler DisplayedExceptionChanged;
 		private Exception exception;
 		public Exception Exception
@@ -36,7 +37,30 @@ namespace BrinkerVII
 		public DetailedExceptionBox()
 		{
 			InitializeComponent();
+
+			this.btnLevelDown.Click += BtnLevelDown_Click;
+			this.btnLevelUp.Click += BtnLevelUp_Click;
+			this.btnClose.Click += (sender, e) => this.Close();
+			this.FormClosing += (sender, e) => this.DialogResult = DialogResult.Cancel;
 		}
+
+		private void BtnLevelUp_Click(object sender, EventArgs e)
+		{
+			if (this.exceptionStack.Count > 0)
+			{
+				this.ChangeDisplayedException(this.exceptionStack.Pop());
+			}
+		}
+
+		private void BtnLevelDown_Click(object sender, EventArgs e)
+		{
+			if (this.displayedException.InnerException != null)
+			{
+				this.exceptionStack.Push(this.displayedException);
+				this.ChangeDisplayedException(this.displayedException.InnerException);
+			}
+		}
+
 		public DetailedExceptionBox(Exception e) : this()
 		{
 			this.Exception = e;
@@ -59,10 +83,17 @@ namespace BrinkerVII
 				this.currentExceptionPanel.Dispose();
 			}
 
-			this.currentExceptionPanel = new ExceptionPanel(this.displayedException);
+			this.currentExceptionPanel = new ExceptionPanel(this.displayedException)
+			{
+				Top = 10
+			};
 			this.Controls.Add(this.currentExceptionPanel);
+			this.btnLevelDown.Enabled = this.displayedException.InnerException != null;
+			this.btnLevelUp.Enabled = this.exceptionStack.Count > 0;
+			this.Size = new Size(this.currentExceptionPanel.Width + this.currentExceptionPanel.Left + 20, this.currentExceptionPanel.Height + this.currentExceptionPanel.Top + 100);
 
 			this.DisplayedExceptionChanged?.Invoke(this, oldException);
 		}
+
 	}
 }

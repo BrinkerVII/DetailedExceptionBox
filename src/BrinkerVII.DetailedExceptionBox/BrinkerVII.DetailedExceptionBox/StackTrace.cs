@@ -19,7 +19,6 @@ namespace BrinkerVII
 
 			this.ParseString();
 		}
-
 		private void ParseString()
 		{
 			this.lines.Clear();
