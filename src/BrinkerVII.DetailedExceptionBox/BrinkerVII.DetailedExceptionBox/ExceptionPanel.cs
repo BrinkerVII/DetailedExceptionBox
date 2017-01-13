@@ -43,6 +43,7 @@ namespace BrinkerVII
 					(control as TextBox).Text = "";
 				}
 			}
+			this.listStackTrace.Items.Clear();
 		}
 		private void FillPanel()
 		{

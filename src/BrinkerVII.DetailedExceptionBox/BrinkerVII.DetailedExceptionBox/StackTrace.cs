@@ -24,7 +24,10 @@ namespace BrinkerVII
 			this.lines.Clear();
 			foreach (string line in this.String.Split('\n'))
 			{
-				this.lines.Add(new StackTraceLine(line));
+				if (!string.IsNullOrWhiteSpace(line))
+				{
+					this.lines.Add(new StackTraceLine(line));
+				}
 			}
 		}
 	}

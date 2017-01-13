@@ -12,6 +12,7 @@ namespace BrinkerVII
 	{
 		private string bigOldPattern = @"^\s+at\s*([\S\s]+)\sin\s([\S\s]+)\:line\s(\d+)";
 		private string toStringValue = "";
+		private bool matchSuccess = false;
 		public string String { get; private set; }
 		public string Method { get; private set; }
 		public string File { get; private set; }
@@ -26,6 +27,16 @@ namespace BrinkerVII
 		private void DoPatternMatching()
 		{
 			Match match = Regex.Match(this.String, bigOldPattern);
+			if (!match.Success)
+			{
+				this.Method = this.String;
+				this.File = this.String;
+				this.FileName = this.File;
+				this.LineNumber = -1;
+				return;
+			}
+
+			this.matchSuccess = true;
 			this.Method = match.Groups[1].Value;
 			this.File = match.Groups[2].Value;
 			this.LineNumber = Int32.Parse(match.Groups[3].Value);
@@ -43,7 +54,14 @@ namespace BrinkerVII
 		}
 		private void UpdateToStringValue()
 		{
-			this.toStringValue = string.Format("{0} line {1} : {2}", this.FileName, this.LineNumber, this.Method);
+			if (this.matchSuccess)
+			{
+				this.toStringValue = string.Format("{0} line {1} : {2}", this.FileName, this.LineNumber, this.Method);
+			}
+			else
+			{
+				this.toStringValue = this.Method;
+			}
 		}
 		public override string ToString()
 		{
