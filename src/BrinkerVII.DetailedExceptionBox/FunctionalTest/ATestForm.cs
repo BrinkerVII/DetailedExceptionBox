@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrinkerVII;
 
 namespace FunctionalTest
 {
@@ -15,6 +16,22 @@ namespace FunctionalTest
 		public ATestForm()
 		{
 			InitializeComponent();
+		}
+
+		private void btnDivideByZero_Click(object sender, EventArgs e)
+		{
+			try { this.DivideByZero(); }
+			catch (Exception ex)
+			{
+				(new DetailedExceptionBox(ex)).Show();
+			}
+		}
+
+		private void DivideByZero()
+		{
+			int totallyNotZero = 5 - 5;
+			int q = 5 / totallyNotZero;
+			MessageBox.Show(q.ToString());
 		}
 	}
 }
